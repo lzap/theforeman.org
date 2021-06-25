@@ -90,10 +90,14 @@ All security advisories made for Foreman are listed below with their correspondi
 
 Sendmail location and arguments, available via Administer - Settings, both accept arbitrary strings and pass them into shell. By default, only Foreman super administrator can access settings.
 
-*Mitigation:* Verify the both settings and remove edit_settings permissions to all roles and users until fixed. Alternatively, create entries in `settings.yaml` to override UI settings and make the read-only:
+*Mitigation 1:* Verify the both settings and remove edit_settings permissions to all roles and users until fixed.
 
-    :sendmail_location: "/usr/sbin/sendmail"
-    :sendmail_arguments: "-i"
+*Mitigation 2:* Create entries in `settings.yaml` to override UI settings and make them read-only. Note that the installer will revert these changes. [#32827](https://projects.theforeman.org/issues/32827) will add options to the installer which makes it supported.
+
+```yaml
+:sendmail_location: "/usr/sbin/sendmail"
+:sendmail_arguments: "-i"
+```
 
 * Affects Foreman version 1.15 and higher
 * Fix released in Foreman 2.4.1, 2.5.1 and higher
